@@ -1,21 +1,13 @@
-import express, { response } from 'express'
+import express from 'express';
+import 'reflect-metadata';
+import './database'
+import {router} from './routes'
 
 const app = express();
 
-app.get("/", (req,res)=>
-{
-    return res.json(
-        {
-            message:"Teste de los crias"
-        })
-});
+app.use(express.json())
+app.use(router)
 
-app.post("/",(req,res)=>
-{
-    return res.json(
-        {
-            message:"Post del macho"
-        })
-})
+
 
 app.listen(9999, ()=> console.log("Rodando na porta "));
