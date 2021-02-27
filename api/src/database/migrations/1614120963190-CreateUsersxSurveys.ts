@@ -28,7 +28,8 @@ export class CreateUsersxSurveys1614120963190 implements MigrationInterface {
                         
                         {
                             name:"value",
-                            type:"int"
+                            type:"int",
+                            isNullable: true
                         },
                         {
                             name:'createdAt',
@@ -47,7 +48,8 @@ export class CreateUsersxSurveys1614120963190 implements MigrationInterface {
                     columnNames:["userId"],
                     referencedColumnNames:["id"],
                     referencedTableName: "users",
-                    onDelete:"CASCADE"
+                    onDelete:"CASCADE",
+                    onUpdate:"CASCADE"
                 }
             ),
             new TableForeignKey(
@@ -55,7 +57,8 @@ export class CreateUsersxSurveys1614120963190 implements MigrationInterface {
                     columnNames:["surveyId"],
                     referencedColumnNames:["id"],
                     referencedTableName: "surveys",
-                    onDelete:"CASCADE"
+                    onDelete:"CASCADE",
+                    onUpdate:"CASCADE"
                 }
             )
         ])

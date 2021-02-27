@@ -64,7 +64,7 @@ class SurveyController
 
     async deleteById(req:Request,res:Response)
     {
-        const {id} = req.params || null
+        const {id} = req.params
 
         const surveyRepository = getCustomRepository(SurveyRepository)
 

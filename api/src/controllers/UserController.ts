@@ -88,7 +88,7 @@ class UserController
 
     async get(req:Request,res:Response)
     {
-        const {id} = req.params || null
+        const {id} = req.params
 
         const userRepository = getCustomRepository(UserRepository)
 
