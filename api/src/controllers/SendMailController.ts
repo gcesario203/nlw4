@@ -8,6 +8,7 @@ import {resolve} from 'path'
 
 class SendMailController
 {
+
     async execute(req:Request,res:Response)
     {
         const {email,surveyId} = req.body
@@ -36,13 +37,10 @@ class SendMailController
                 })
         }
 
-        const suveryUserAlreadyExists = await surveyxuserRepo.findOne(
+        const surveyUserAlreadyExists = await surveyxuserRepo.findOne(
             {
-                where:[
-                    {userId: user.id},
-                    {surveyId: survey.id},
-                    {value: null}
-                ]
+                where:{userId: user.id,surveyId: survey.id,value: null},
+                relations:["user","survey"], 
             }
         )
 
@@ -51,18 +49,18 @@ class SendMailController
             name: user.name,
             title: survey.title,
             description: survey.description,
-            userId: user.id,
+            sxuId: 0,
             link: process.env.URL_MAIL,
-            surveyId: survey.id
         }
 
-        if(suveryUserAlreadyExists)
+        if(surveyUserAlreadyExists)
         {
+            vars.sxuId = surveyUserAlreadyExists.id
             await SendMailService.execute(email,survey.title, vars,path);
             res.status(200).json(
                 {
                     "message":"Sended again the survey",
-                    ...suveryUserAlreadyExists
+                    ...surveyUserAlreadyExists
                 })
         }
         else
@@ -74,6 +72,8 @@ class SendMailController
                 })
     
             await surveyxuserRepo.save(surveyXuser)
+
+            vars.sxuId = surveyXuser.id
     
             await SendMailService.execute(email,survey.title, vars,path);
     
