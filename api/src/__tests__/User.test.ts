@@ -1,5 +1,6 @@
 import request from 'supertest'
 import 'ts-jest'
+import { getConnection } from 'typeorm'
 import {app} from '../app'
 import createConnection from '../database'
 
@@ -13,6 +14,13 @@ describe("Users",  ()=>
         await connection.runMigrations();
     })
 
+    afterAll(async ()=>
+    {
+        const connection = await getConnection();
+        await connection.dropDatabase();
+        await connection.close();
+    })
+
     it("Should be able to create a new user", async()=>
     {
         const response = await request(app)
@@ -22,8 +30,6 @@ describe("Users",  ()=>
             email: "user@example",
             name:"userExample"
         })
-
-        console.log(response.body)
         let {id} = response.body
 
         testingId = id

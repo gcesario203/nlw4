@@ -3,6 +3,7 @@ import { UserRouter } from "./UserRoutes"
 import {SurveyRouter} from './SurveyRoutes'
 import {SendMailRouter} from './SendMailRoutes'
 import {AnswerRouter} from './AnswerRoutes'
+import {NpsRouter} from './NpsRoutes'
 
 export class RoutesHandler
 {
@@ -10,6 +11,7 @@ export class RoutesHandler
     surveyRoutes:SurveyRouter;
     sendMaildRoutes:SendMailRouter;
     answerRoutes: AnswerRouter;
+    npsRoutes:NpsRouter
 
     constructor()
     {
@@ -17,6 +19,7 @@ export class RoutesHandler
         this.surveyRoutes = new SurveyRouter();
         this.sendMaildRoutes = new SendMailRouter();
         this.answerRoutes = new AnswerRouter();
+        this.npsRoutes = new NpsRouter();
     }
 
     init()
