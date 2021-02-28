@@ -22,8 +22,7 @@ describe("Surveys",  ()=>
             title: "survey@example",
             description:"surveyExample"
         })
-
-        console.log(response.body)
+        
         let {id} = response.body
 
         testingId = id
@@ -57,8 +56,6 @@ describe("Surveys",  ()=>
         const response = await request(app)
         .get(`/surveys/${testingId}`)
 
-        console.log(testingId)
-
         expect(response.status).toBe(200);
     })
 
@@ -66,8 +63,6 @@ describe("Surveys",  ()=>
     {
         const response = await request(app)
         .delete(`/surveys/${testingId}`)
-
-        console.log(testingId)
 
         expect(response.status).toBe(200);
     })
