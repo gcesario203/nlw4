@@ -16,10 +16,11 @@ describe("Surveys",  ()=>
 
     afterAll(async ()=>
     {
-        const connection = await getConnection();
-        await connection.dropDatabase();
-        await connection.close();
+        const connection = getConnection();
+        await connection.dropDatabase()
+        await connection.close()
     })
+
 
     it("Should be able to create a new survey", async()=>
     {
